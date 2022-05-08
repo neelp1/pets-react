@@ -1,30 +1,38 @@
+import { useState, useEffect } from 'react';
+
 import PetList from "../components/pets/PetList";
 
-
-const DUMMY_DATA = [
-  {
-    id: "d1",
-    title: "Daschund",
-    image:
-      "https://www.dogtime.com/assets/uploads/2011/01/file_23020_dachshund-dog-breed.jpg",
-    address: "1212 Paw Walk, Pawtown",
-    description: "First dog in the store",
-  },
-  {
-    id: "d2",
-    title: "Greyhound",
-    image:
-      "https://www.dogtime.com/assets/uploads/2011/01/file_23024_greyhound.jpg",
-    address: "5223 Tail Lane, Pawtown",
-    description: "Fastest dog in the store",
-  },
-];
-
 function AllPetsPage() {
+  const [isLoading, setIsLoading] = useState(true);
+  const [loadedPets, setLoadedPets] = useState([]);
+
+  useEffect(() => {
+    setIsLoading(true);
+    const api_url = new URL("http://localhost:3001/api/pets/dogs");
+    //Call pets-app REST API
+    fetch(api_url)
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+        setIsLoading(false);
+        setLoadedPets(data);
+      });
+  }, []);
+
+  if (isLoading) {
+    return (
+      <section>
+        <p>Loading...</p>
+      </section>
+    );
+  }
+
   return (
     <section>
       <h1>All Dogs</h1>
-      <PetList pets={DUMMY_DATA} />
+      <PetList pets={loadedPets} />
     </section>
   );
 }
