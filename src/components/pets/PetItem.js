@@ -7,14 +7,16 @@ import FavouritesContext from "../../store/favourites-context";
 function PetItem(props) {
   const favouriteCtx = useContext(FavouritesContext);
 
-  const itemIsFavourite = favouriteCtx.itemIsFavourite(props.id);
+  const itemIsFavourite = favouriteCtx.itemIsFavourite(props._id); //change back to "id" if app breaks
+
+  console.log('PetItem props: ', props);
 
   function toggleFavouriteStatusHandler() {
     if (itemIsFavourite) {
-      favouriteCtx.removeFavourite(props.id);
+      favouriteCtx.removeFavourite(props._id);
     } else {
       favouriteCtx.addFavourite({
-        id: props.id,
+        _id: props._id,
         title: props.title,
         description: props.description,
         image: props.image,
