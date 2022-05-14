@@ -10,6 +10,8 @@ const FavouritesContext = createContext({
 
 //store favourite in browser storage or server
 export function FavouritesContextProvider(props) {
+    console.log('favourites context: ', props)
+
     const [userFavourites, setUserFavourites] = useState([]);
 
     function addFavouriteHandler(favouritePet) {
@@ -20,12 +22,12 @@ export function FavouritesContextProvider(props) {
 
     function removeFavouriteHandler(petId) {
         setUserFavourites(prevUserFavourites => {
-            return prevUserFavourites.filter(pet => pet.id !== petId);//make sure pet has id key?
+            return prevUserFavourites.filter(pet => pet._id !== petId);//make sure pet has id key?
         });
     };
 
     function itemIsFavouriteHandler(petId) {
-        return userFavourites.some(pet => pet.id === petId);//make sure pet has id key?
+        return userFavourites.some(pet => pet._id === petId);//make sure pet has id key?
     };
     
     const context = {
