@@ -9,8 +9,6 @@ function PetItem(props) {
 
   const itemIsFavourite = favouriteCtx.itemIsFavourite(props._id); //change back to "id" if app breaks
 
-  console.log('PetItem props: ', props);
-
   function toggleFavouriteStatusHandler() {
     if (itemIsFavourite) {
       favouriteCtx.removeFavourite(props._id);

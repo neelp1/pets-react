@@ -10,8 +10,6 @@ const FavouritesContext = createContext({
 
 //store favourite in browser storage or server
 export function FavouritesContextProvider(props) {
-    console.log('favourites context: ', props)
-
     const [userFavourites, setUserFavourites] = useState([]);
 
     function addFavouriteHandler(favouritePet) {
